@@ -1,13 +1,10 @@
 package ga;
 
 
-import java.util.List;
-import java.util.ArrayList;
-
-
 public class GeneticAlgorithm {
 	
 	
+	private WindFarmLayoutEvaluator evaluator;
 	private Population childPopulation;
 	private Population adultPopulation;
 	private Population parentPopulation;
@@ -17,7 +14,8 @@ public class GeneticAlgorithm {
 	private Mutation mutation;
 	
 	
-	public GeneticAlgorithm(int populationSize, int individualSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate){
+	public GeneticAlgorithm(WindFarmLayoutEvaluator evaluator, int populationSize, int individualSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate){
+		this.evaluator = evaluator;
 		this.childPopulation  = new Population(individualSize, populationSize);
 		this.adultPopulation  = new Population();
 		this.parentPopulation = new Population();
