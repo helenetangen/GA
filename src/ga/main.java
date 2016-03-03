@@ -7,20 +7,20 @@ public class main {
 	public static void main(String[] args){
 		
 		//Parameters
-		int adultPopulationSize  = 4;
-		int parentPopulationSize = 4;
-		int childPopulationSize  = 4;
-		int individualSize = 5;
-		int generations = 5;
+		int adultPopulationSize  = 10;
+		int parentPopulationSize = 10;
+		int childPopulationSize  = 10;
+		int individualSize = 20;
+		int generations = 20;
 		
 		//Crossover
-		double crossoverRate = 0.0;
+		double crossoverRate = 0.9;
 		
 		//Mutation
 		double flipMutationRate        = 0.01;
-		double inversionMutationRate   = 0.0;
-		double interchangeMutationRate = 0.0;
-		double reversingMutationRate   = 0.0;
+		double inversionMutationRate   = 0.01;
+		double interchangeMutationRate = 0.01;
+		double reversingMutationRate   = 0.01;
 		
 		//Adult selection:
 		AdultSelection adultSelection = new FullGenerationalReplacement();
@@ -28,7 +28,7 @@ public class main {
 		//AdultSelection adultSelection = new GenerationalMixing(adultPopulationSize);
 		
 		//Parent selection
-		int tournamentSize = 4;
+		int tournamentSize = 4; 	
 		ParentSelection parentSelection = new TournamentSelection(parentPopulationSize, tournamentSize);
 		
 		//Crossover method

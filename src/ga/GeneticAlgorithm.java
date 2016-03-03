@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class GeneticAlgorithm {
 	
 	
-	private List<Individual> childPopulation;
-	private List<Individual> adultPopulation;
-	private List<Individual> parentPopulation;
+	private Population childPopulation;
+	private Population adultPopulation;
+	private Population parentPopulation;
 	private AdultSelection adultSelection;
 	private ParentSelection parentSelection;
 	private Crossover crossover;
@@ -18,12 +18,9 @@ public class GeneticAlgorithm {
 	
 	
 	public GeneticAlgorithm(int populationSize, int individualSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate){
-		this.childPopulation  = new ArrayList<Individual>();
-		this.adultPopulation  = new ArrayList<Individual>();
-		this.parentPopulation = new ArrayList<Individual>();
-		for (int i = 0; i < populationSize; i++){
-			childPopulation.add(new Individual(individualSize));
-		}
+		this.childPopulation  = new Population(individualSize, populationSize);
+		this.adultPopulation  = new Population();
+		this.parentPopulation = new Population();
 		this.adultSelection  = adultSelection;
 		this.parentSelection = parentSelection;
 		this.crossover = crossover;
@@ -36,95 +33,33 @@ public class GeneticAlgorithm {
 		while (run < generations){
 			
 			//Calculate fitness
-			this.calculateFitness();
-			this.printPopulation(childPopulation, "Child population");
-			this.printAverageFitness(childPopulation);
-			this.printBestFitness(childPopulation);
+			childPopulation.calculateFitness();
+			childPopulation.printPopulation("Child population");
+			childPopulation.printAverageFitness();
+			childPopulation.printBestFitness();
 			
 			//Adult Selection
-			this.adultPopulation = adultSelection.select(childPopulation, adultPopulation);
-			this.printPopulation(adultPopulation, "Adult population");
-			this.printAverageFitness(adultPopulation);
-			this.printBestFitness(adultPopulation);
+			adultPopulation = adultSelection.select(childPopulation, adultPopulation);
+			adultPopulation.printPopulation("Adult population");
+			adultPopulation.printAverageFitness();
+			adultPopulation.printBestFitness();
 			
 			//Parent Selection
-			this.parentPopulation = parentSelection.select(adultPopulation);
-			this.printPopulation(parentPopulation, "Parent population");
-			this.printAverageFitness(parentPopulation);
-			this.printBestFitness(parentPopulation);
+			parentPopulation = parentSelection.select(adultPopulation);
+			parentPopulation.printPopulation("Parent population");
+			parentPopulation.printAverageFitness();
+			parentPopulation.printBestFitness();
 			
 			//Child generations
-			this.childPopulation = crossover.crossover(parentPopulation);
-			this.childPopulation = mutation.flipMutation(childPopulation);
-			this.childPopulation = mutation.inversionMutation(childPopulation);
-			this.childPopulation = mutation.interchangeMutation(childPopulation);
-			this.childPopulation = mutation.reversingMutation(childPopulation);
+			childPopulation = crossover.crossover(parentPopulation);
+			childPopulation = mutation.flipMutation(childPopulation);
+			childPopulation = mutation.inversionMutation(childPopulation);
+			childPopulation = mutation.interchangeMutation(childPopulation);
+			childPopulation = mutation.reversingMutation(childPopulation);
 			
 			//Generations
 			run += 1;
 		}
-	}
-	
-	
-	public void calculateFitness(){
-		for (int i = 0; i < this.childPopulation.size(); i++){
-			this.childPopulation.get(i).calculateFitness();
-		}
-	}
-	
-	
-	public void printPopulation(List<Individual> population, String populationName){
-		System.out.println();
-		System.out.println(populationName + ": ");
-		for (int i = 0; i < population.size(); i++){
-			System.out.print("Genotype: ");
-			for (int j = 0; j < population.get(i).getGenotype().length; j++){
-				System.out.print(population.get(i).getGeneAsInteger(j) + " ");
-			}
-			System.out.print("  Fitness: " + population.get(i).getFitness());
-			System.out.println();
-		}
-		System.out.println();
-	}
-	
-	
-	public double calculateAverageFitness(List<Individual> population){
-		double fitness = 0; 
-		for (int i = 0; i < population.size(); i++){
-			fitness += population.get(i).getFitness();
-		}
-		return fitness / population.size();
-	}
-	
-	
-	public double calculateBestFitness(List<Individual> population){
-		double bestFitness = population.get(0).getFitness(); 
-		for (int i = 0; i < population.size(); i++){
-			if (population.get(i).getFitness() > bestFitness){
-				bestFitness = population.get(i).getFitness();
-			}
-		}
-		return bestFitness;
-	}
-	
-	
-	public void printAverageFitness(List<Individual> population){
-		System.out.println("Average fitness: " + this.calculateAverageFitness(population));
-	}
-	
-	
-	public void printBestFitness(List<Individual> population){
-		System.out.println("Best fitness: " + this.calculateBestFitness(population));
-
-	}
-	
-	
-	public static List<Individual> copy(List<Individual> population){
-		List<Individual> copy = new ArrayList<Individual>();
-		for (int i = 0; i < population.size(); i++){
-			copy.add(new Individual(population.get(i).copyGenotype(), population.get(i).getFitness()));
-		}
-		return copy;
 	}
 
 	

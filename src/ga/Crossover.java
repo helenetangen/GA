@@ -15,7 +15,7 @@ public abstract class Crossover {
 	}
 	
 	
-	public abstract List<Individual> crossover(List<Individual> parentPopulation);
+	public abstract Population crossover(Population parentPopulation);
 	
 
 }

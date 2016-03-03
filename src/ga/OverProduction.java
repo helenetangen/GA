@@ -17,9 +17,9 @@ public class OverProduction implements AdultSelection{
 	}
 	
 	
-	public List<Individual> select(List<Individual> childPopulation, List<Individual> adultPopulation) {
-		Collections.sort(childPopulation);
-		return GeneticAlgorithm.copy(childPopulation.subList(0, adultPopulationSize));
+	public Population select(Population childPopulation, Population adultPopulation) {
+		Collections.sort(childPopulation.getPopulation());
+		return new Population(childPopulation.getPopulation().subList(0, adultPopulationSize)).copy();
 	}
 
 	

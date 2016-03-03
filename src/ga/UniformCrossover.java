@@ -13,7 +13,7 @@ public class UniformCrossover extends Crossover{
 	}
 
 	
-	public List<Individual> crossover(List<Individual> parentPopulation) {
+	public Population crossover(Population parentPopulation) {
 		Random random = new Random();
 		List<Individual> childPopulation = new ArrayList<Individual>();
 		for (int i = 0; i < parentPopulation.size(); i+=2){
@@ -40,7 +40,7 @@ public class UniformCrossover extends Crossover{
 				childPopulation.add(new Individual(parentTwo.copyGenotype()));
 			}
 		}
-		return childPopulation;
+		return new Population(childPopulation);
 	}
 	
 

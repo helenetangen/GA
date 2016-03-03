@@ -1,7 +1,6 @@
 package ga;
 
 
-import java.util.List;
 import java.util.Random;
 
 
@@ -22,12 +21,11 @@ public class Mutation {
 	}
 	
 	
-	public List<Individual> flipMutation(List<Individual> childPopulation){
+	public Population flipMutation(Population childPopulation){
 		Random random = new Random();
 		for (int i = 0; i < childPopulation.size(); i++){
 			for (int j = 0; j < childPopulation.get(0).getGenotype().length; j++){
 				if (random.nextDouble() < flipMutationRate){
-					System.out.println("Child " + i + " is flippen on position " + j);
 					childPopulation.get(i).getGenotype()[j] = !childPopulation.get(i).getGenotype()[j];
 				}
 			}
@@ -36,7 +34,7 @@ public class Mutation {
 	}
 	
 	
-	public List<Individual> interchangeMutation(List<Individual> childPopulation){
+	public Population interchangeMutation(Population childPopulation){
 		Random random = new Random();
 		for (int i = 0; i < childPopulation.size(); i++){
 			if (random.nextDouble() < this.interchangeMutationRate){
@@ -52,7 +50,7 @@ public class Mutation {
 	}
 	
 	
-	public List<Individual> inversionMutation(List<Individual> childPopulation){
+	public Population inversionMutation(Population childPopulation){
 		Random random = new Random();
 		for (int i = 0; i < childPopulation.size(); i++){
 			if (random.nextDouble() < inversionMutationRate){
@@ -68,7 +66,7 @@ public class Mutation {
 	}
 	
 	
-	public List<Individual> reversingMutation(List<Individual> childPopulation){
+	public Population reversingMutation(Population childPopulation){
 		Random random = new Random();
 		for (int i = 0; i < childPopulation.size(); i++){
 			if (random.nextDouble() < reversingMutationRate){
