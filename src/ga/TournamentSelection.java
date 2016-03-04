@@ -24,10 +24,10 @@ public class TournamentSelection implements ParentSelection{
 		Random random = new Random();
 		for (int i = 0; i < parentPopulationSize; i++){
 			int bestIndex = -1;
-			double bestFitness = Double.MIN_VALUE;
+			double bestFitness = Double.MAX_VALUE;
 			for (int j = 0; j < tournamentSize; j++){
 				int index = random.nextInt(adultPopulation.size());
-				if (adultPopulation.get(index).getFitness() > bestFitness){
+				if (adultPopulation.get(index).getFitness() < bestFitness){
 					bestFitness = adultPopulation.get(index).getFitness();
 					bestIndex = index;
 				}

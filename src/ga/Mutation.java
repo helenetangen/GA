@@ -14,9 +14,9 @@ public class Mutation {
 	
 	
 	public Mutation(double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate){
-		this.flipMutationRate        = flipMutationRate;
-		this.inversionMutationRate   = inversionMutationRate;
-		this.interchangeMutationRate = interchangeMutationRate;
+		this.flipMutationRate          = flipMutationRate;
+		this.inversionMutationRate     = inversionMutationRate;
+		this.interchangeMutationRate   = interchangeMutationRate;
 		this.reversingMutationRate     = reversingMutationRate;
 	}
 	

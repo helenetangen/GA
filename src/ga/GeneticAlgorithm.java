@@ -1,10 +1,17 @@
 package ga;
 
+import java.util.ArrayList;
 
 public class GeneticAlgorithm {
 	
+	//Constants
+	private final double MINIMUM_SPACING_DISTANCE = 8.01;
 	
+	//Wind parameters
 	private WindFarmLayoutEvaluator evaluator;
+	private ArrayList<double[]> grid;
+	
+	//Ga parameters
 	private Population childPopulation;
 	private Population adultPopulation;
 	private Population parentPopulation;
@@ -14,9 +21,13 @@ public class GeneticAlgorithm {
 	private Mutation mutation;
 	
 	
-	public GeneticAlgorithm(WindFarmLayoutEvaluator evaluator, int populationSize, int individualSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate){
+	public GeneticAlgorithm(WindFarmLayoutEvaluator evaluator, int populationSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate){
 		this.evaluator = evaluator;
-		this.childPopulation  = new Population(individualSize, populationSize);
+		this.grid = new ArrayList<double[]>();
+		this.makeGrid();
+		
+		//GA parameters
+		this.childPopulation  = new Population(grid.size(), populationSize);
 		this.adultPopulation  = new Population();
 		this.parentPopulation = new Population();
 		this.adultSelection  = adultSelection;
@@ -31,22 +42,26 @@ public class GeneticAlgorithm {
 		while (run < generations){
 			
 			//Calculate fitness
-			childPopulation.calculateFitness();
-			childPopulation.printPopulation("Child population");
+			childPopulation.evaluate(evaluator, grid);
+			//childPopulation.printPopulation("Child population");
+			
+			System.out.print("Child population : ");
 			childPopulation.printAverageFitness();
-			childPopulation.printBestFitness();
+			//childPopulation.printBestFitness();
 			
 			//Adult Selection
 			adultPopulation = adultSelection.select(childPopulation, adultPopulation);
-			adultPopulation.printPopulation("Adult population");
+			//adultPopulation.printPopulation("Adult population");
+			System.out.print("Adult population : ");
 			adultPopulation.printAverageFitness();
-			adultPopulation.printBestFitness();
+			//adultPopulation.printBestFitness();
 			
 			//Parent Selection
 			parentPopulation = parentSelection.select(adultPopulation);
-			parentPopulation.printPopulation("Parent population");
+			//parentPopulation.printPopulation("Parent population");
+			System.out.print("Parent population: ");
 			parentPopulation.printAverageFitness();
-			parentPopulation.printBestFitness();
+			//parentPopulation.printBestFitness();
 			
 			//Child generations
 			childPopulation = crossover.crossover(parentPopulation);
@@ -57,6 +72,27 @@ public class GeneticAlgorithm {
 			
 			//Generations
 			run += 1;
+		}
+	}
+	
+	
+	public void makeGrid(){
+		double interval = this.MINIMUM_SPACING_DISTANCE * evaluator.getTurbineRadius();
+		for (double x = 0.0; x < evaluator.getFarmWidth(); x += interval){
+			for (double y = 0.0; y < evaluator.getFarmHeight(); y += interval){
+				boolean valid = true;
+				for (int o = 0; o < evaluator.getObstacles().length; o++){
+					double[] obstacle = evaluator.getObstacles()[o];
+					if (x > obstacle[0] && y > obstacle[1] && x < obstacle[2] && y < obstacle[3]){
+						valid = false;
+						break;
+					}
+				}
+				if (valid){
+					double[] point = {x, y};
+					grid.add(point);
+				}
+			}
 		}
 	}
 

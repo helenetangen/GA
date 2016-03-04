@@ -7,26 +7,27 @@ public class main {
 	public static void main(String[] args){
 		try{
 			//Wind scenario
-			WindScenario WindScenario = new WindScenario("../Scenarios/00.xml");
+			WindScenario windScenario = new WindScenario("Scenarios/00.xml");
 			
 			//Evaluator
 			KusiakLayoutEvaluator evaluator = new KusiakLayoutEvaluator();
+			evaluator.initialize(windScenario);
 			
 			//Parameters
 			int adultPopulationSize  = 10;
 			int parentPopulationSize = 10;
 			int childPopulationSize  = 10;
 			int individualSize = 20;
-			int generations = 20;
+			int generations = 10;
 			
 			//Crossover
-			double crossoverRate = 0.9;
+			double crossoverRate = 0.1;
 			
 			//Mutation
-			double flipMutationRate        = 0.01;
-			double inversionMutationRate   = 0.01;
-			double interchangeMutationRate = 0.01;
-			double reversingMutationRate   = 0.01;
+			double flipMutationRate        = 0.0;
+			double inversionMutationRate   = 0.0;
+			double interchangeMutationRate = 0.0;
+			double reversingMutationRate   = 0.0;
 			
 			//Adult selection:
 			AdultSelection adultSelection = new FullGenerationalReplacement();
@@ -42,7 +43,7 @@ public class main {
 			//Crossover crossover = new TwoPointCrossover(crossoverRate);
 			Crossover crossover   = new UniformCrossover(crossoverRate);
 			
-			GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, individualSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
+			GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
 			ga.run(generations);
 			
 		}catch(Exception exception){

@@ -33,6 +33,10 @@ public class Individual implements Comparable<Individual>{
 	}
 	
 	
+	public int size(){
+		return genotype.length;
+	}
+	
 	public void calculateFitness(){
 		fitness = 0;
 		for (int i = 0; i < genotype.length; i++){
@@ -45,6 +49,11 @@ public class Individual implements Comparable<Individual>{
 	
 	public double getFitness(){
 		return this.fitness;
+	}
+	
+	
+	public void setFitness(double fitness){
+		this.fitness = fitness;
 	}
 	
 	
@@ -69,7 +78,7 @@ public class Individual implements Comparable<Individual>{
 	
 	
 	public int compareTo(Individual individual) {
-		if (this.fitness < individual.fitness){
+		if (this.fitness > individual.fitness){
 			return 1;
 		}
 		else if (this.fitness == individual.fitness){

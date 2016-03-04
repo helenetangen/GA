@@ -115,5 +115,40 @@ public class Population{
 		return copy;
 	}
 	
+	
+	public void evaluate(WindFarmLayoutEvaluator evaluator, ArrayList<double[]> grid){
+		for (int p = 0; p < population.size(); p++){
+			int turbineCount = 0;
+			for (int i = 0; i < population.get(0).size(); i++){
+				if (population.get(p).getGene(i)){
+					turbineCount++;
+				}
+			}
+			
+			double[][] layout = new double[turbineCount][2];
+			int j = 0;
+			for (int i = 0; i < grid.size(); i++){
+				if (population.get(p).getGene(i)){
+					layout[j][0] = grid.get(i)[0];
+					layout[j][1] = grid.get(i)[1];
+					j++;
+				}
+			}
+			
+			double energyCost;
+			if (evaluator.checkConstraint(layout)){
+				evaluator.evaluate(layout);
+				energyCost = evaluator.getEnergyCost();
+			}
+			else{
+				energyCost = Double.MAX_VALUE;
+			}
+			population.get(p).setFitness(energyCost);
+		}
+		
+		
+		
+	}
+	
 
 }
