@@ -1,17 +1,16 @@
 package ga;
 
 
-import java.util.List;
-
-
 public abstract class Crossover {
 	
 	
 	protected double crossoverRate;
+	protected boolean elitism;
 	
 	
-	public Crossover(double crossoverRate){
+	public Crossover(double crossoverRate, boolean elitism){
 		this.crossoverRate = crossoverRate;
+		this.elitism = elitism;
 	}
 	
 	

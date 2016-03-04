@@ -1,6 +1,11 @@
 package ga;
 
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+
 
 public class GeneticAlgorithm {
 	
@@ -37,13 +42,23 @@ public class GeneticAlgorithm {
 	}
 	
 	
-	public void run(int generations){
+	public void run(int generations, int simulation){
+		System.out.println("Simulation: " + simulation);
+		ArrayList<Double> averageFitness = new ArrayList<Double>();
+		ArrayList<Double> bestFitness    = new ArrayList<Double>();
+		ArrayList<Double> worstFitness   = new ArrayList<Double>();
+		
 		int run = 0;
 		while (run < generations){
+			System.out.println("Generation: " + run);
 			
 			//Calculate fitness
 			childPopulation.evaluate(evaluator, grid);
+			averageFitness.add(childPopulation.calculateAverageFitness());
+			bestFitness.add(childPopulation.calculateBestFitness());
+			worstFitness.add(childPopulation.calculateWorstFitness());
 			//childPopulation.printPopulation("Child population");
+			//writeResults("average", Double.toString(childPopulation.calculateAverageFitness()));
 			
 			System.out.print("Child population : ");
 			childPopulation.printAverageFitness();
@@ -52,15 +67,15 @@ public class GeneticAlgorithm {
 			//Adult Selection
 			adultPopulation = adultSelection.select(childPopulation, adultPopulation);
 			//adultPopulation.printPopulation("Adult population");
-			System.out.print("Adult population : ");
-			adultPopulation.printAverageFitness();
+			//System.out.print("Adult population : ");
+			//adultPopulation.printAverageFitness();
 			//adultPopulation.printBestFitness();
 			
 			//Parent Selection
 			parentPopulation = parentSelection.select(adultPopulation);
 			//parentPopulation.printPopulation("Parent population");
-			System.out.print("Parent population: ");
-			parentPopulation.printAverageFitness();
+			//System.out.print("Parent population: ");
+			//parentPopulation.printAverageFitness();
 			//parentPopulation.printBestFitness();
 			
 			//Child generations
@@ -73,6 +88,18 @@ public class GeneticAlgorithm {
 			//Generations
 			run += 1;
 		}
+		
+		childPopulation.evaluate(evaluator, grid);
+		childPopulation.printAverageFitness();
+		averageFitness.add(childPopulation.calculateAverageFitness());
+		bestFitness.add(childPopulation.calculateBestFitness());
+		worstFitness.add(childPopulation.calculateWorstFitness());
+		String fileNameAverage = "average" + simulation;
+		String fileNameBest    = "best" + simulation;
+		String fileNameWorst   = "worst" + simulation;
+		writeResults(fileNameAverage, averageFitness);
+		writeResults(fileNameBest, bestFitness);
+		writeResults(fileNameWorst, worstFitness);
 	}
 	
 	
@@ -96,5 +123,27 @@ public class GeneticAlgorithm {
 		}
 	}
 
+	
+	public void writeResults(String filename, ArrayList<Double> results){
+        FileWriter output = null;
+        try {
+        	File file = new File(filename);
+        	output = new FileWriter(file, true);
+        	for (int i = 0; i < results.size(); i++){
+        		output.write(Double.toString(results.get(i)) + ",");
+        	}
+		} catch (IOException exception) {
+		  exception.printStackTrace();
+		} 
+        finally{
+        	try{
+        		output.close();
+        	}catch(Exception exception){
+        		exception.printStackTrace();
+        	}
+        	
+        }
+	}
+	
 	
 }

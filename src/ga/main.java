@@ -14,17 +14,17 @@ public class main {
 			evaluator.initialize(windScenario);
 			
 			//Parameters
-			int adultPopulationSize  = 10;
-			int parentPopulationSize = 10;
-			int childPopulationSize  = 10;
-			int individualSize = 20;
-			int generations = 10;
+			int adultPopulationSize  = 100;
+			int parentPopulationSize = 100;
+			int childPopulationSize  = 100;
+			int generations = 100;
 			
 			//Crossover
-			double crossoverRate = 0.1;
+			double crossoverRate = 0.9;
+			boolean elitism      = true;
 			
 			//Mutation
-			double flipMutationRate        = 0.0;
+			double flipMutationRate        = 0.01;
 			double inversionMutationRate   = 0.0;
 			double interchangeMutationRate = 0.0;
 			double reversingMutationRate   = 0.0;
@@ -39,16 +39,21 @@ public class main {
 			ParentSelection parentSelection = new TournamentSelection(parentPopulationSize, tournamentSize);
 			
 			//Crossover method
-			//Crossover crossover = new SinglePointCrossover(crossoverRate);
-			//Crossover crossover = new TwoPointCrossover(crossoverRate);
-			Crossover crossover   = new UniformCrossover(crossoverRate);
+			//Crossover crossover = new SinglePointCrossover(crossoverRate, elitism);
+			//Crossover crossover = new TwoPointCrossover(crossoverRate, elitism);
+			Crossover crossover   = new UniformCrossover(crossoverRate, elitism);
 			
-			GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
-			ga.run(generations);
+			int simulations = 10;
+			for (int i = 0; i < simulations; i++){
+				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
+				ga.run(generations,  i);
+			}
+			
 			
 		}catch(Exception exception){
 			exception.printStackTrace();
 		}
 	}
+	
 
 }

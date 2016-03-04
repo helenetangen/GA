@@ -100,6 +100,13 @@ public class Individual implements Comparable<Individual>{
 		}
 		return copy;
 	}
+	
+	
+	public Individual copy(){
+		boolean[] newGenotype = this.copyGenotype();
+		return new Individual(newGenotype, this.getFitness());
+		
+	}
 
 	
 }

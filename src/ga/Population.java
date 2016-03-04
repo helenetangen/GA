@@ -73,11 +73,22 @@ public class Population{
 	public double calculateBestFitness(){
 		double bestFitness = population.get(0).getFitness(); 
 		for (int i = 0; i < population.size(); i++){
-			if (population.get(i).getFitness() > bestFitness){
+			if (population.get(i).getFitness() < bestFitness){
 				bestFitness = population.get(i).getFitness();
 			}
 		}
 		return bestFitness;
+	}
+	
+	
+	public double calculateWorstFitness(){
+		double worstFitness = population.get(0).getFitness(); 
+		for (int i = 0; i < population.size(); i++){
+			if (population.get(i).getFitness() > worstFitness){
+				worstFitness = population.get(i).getFitness();
+			}
+		}
+		return worstFitness;
 	}
 	
 	
@@ -88,6 +99,12 @@ public class Population{
 	
 	public void printBestFitness(){
 		System.out.println("Best fitness: " + this.calculateBestFitness());
+
+	}
+	
+	
+	public void printWorstFitness(){
+		System.out.println("Best fitness: " + this.calculateWorstFitness());
 
 	}
 	
