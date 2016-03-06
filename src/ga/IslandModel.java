@@ -37,7 +37,7 @@ public class IslandModel extends GeneticAlgorithm{
 				Collections.sort(islandTwo.getChildPopulation().getPopulation());
 				for (int k = 0; k < migrationRate; k++){
 					int populationSize = islandOne.getChildPopulation().size();
-					islandTwo.getChildPopulation().set(populationSize - k, islandOne.getChildPopulation().get(k));
+					islandTwo.getChildPopulation().set(populationSize - k, islandOne.getChildPopulation().get(k).copy());
 				}
 			}
 		}
