@@ -119,6 +119,11 @@ public class Population{
 	}
 	
 	
+	public void set(int index, Individual individual){
+		this.population.set(index, individual);
+	}
+	
+	
 	public void add(Individual individual){
 		this.population.add(individual);
 	}

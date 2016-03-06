@@ -124,6 +124,11 @@ public class GeneticAlgorithm {
 	}
 
 	
+	public Population getChildPopulation(){
+		return this.childPopulation;
+	}
+	
+	
 	public void writeResults(String filename, ArrayList<Double> results){
         FileWriter output = null;
         try {
