@@ -1,7 +1,9 @@
 package ga;
 
+
 import java.util.Collections;
 import java.util.List;
+
 
 public class IslandModel extends GeneticAlgorithm{
 
@@ -40,9 +42,8 @@ public class IslandModel extends GeneticAlgorithm{
 					islandTwo.getChildPopulation().set(populationSize - k, islandOne.getChildPopulation().get(k).copy());
 				}
 			}
-		}
-		
+		}	
 	}
 	
-
+	
 }

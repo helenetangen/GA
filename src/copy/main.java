@@ -18,9 +18,9 @@ public class main {
 		
 		//Mutation
 		double flipMutationRate        = 0.01;
-		double inversionMutationRate   = 0.01;
-		double interchangeMutationRate = 0.01;
-		double reversingMutationRate   = 0.01;
+		double inversionMutationRate   = 0.0;
+		double interchangeMutationRate = 0.0;
+		double reversingMutationRate   = 0.0;
 		
 		//Adult selection:
 		AdultSelection adultSelection = new FullGenerationalReplacement();

@@ -15,8 +15,8 @@ public class main {
 			
 			//Parameters
 			int adultPopulationSize  = 100;
-			int parentPopulationSize = 100;
-			int childPopulationSize  = 100;
+			int parentPopulationSize = 200;
+			int childPopulationSize  = 200;
 			int generations = 100;
 			
 			//Crossover
@@ -30,8 +30,8 @@ public class main {
 			double reversingMutationRate   = 0.0;
 			
 			//Adult selection:
-			AdultSelection adultSelection = new FullGenerationalReplacement();
-			//AdultSelection adultSelection = new OverProduction(adultPopulationSize);
+			//AdultSelection adultSelection = new FullGenerationalReplacement();
+			AdultSelection adultSelection = new OverProduction(adultPopulationSize);
 			//AdultSelection adultSelection = new GenerationalMixing(adultPopulationSize);
 			
 			//Parent selection
@@ -43,7 +43,7 @@ public class main {
 			//Crossover crossover = new TwoPointCrossover(crossoverRate, elitism);
 			Crossover crossover   = new UniformCrossover(crossoverRate, elitism);
 			
-			int simulations = 10;
+			int simulations = 2;
 			for (int i = 0; i < simulations; i++){
 				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
 				ga.run(generations,  i);
