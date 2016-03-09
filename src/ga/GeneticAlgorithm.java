@@ -10,20 +10,20 @@ import java.util.ArrayList;
 public class GeneticAlgorithm {
 	
 	//Constants
-	private final double MINIMUM_SPACING_DISTANCE = 8.01;
+	protected final double MINIMUM_SPACING_DISTANCE = 8.01;
 	
 	//Wind parameters
-	private WindFarmLayoutEvaluator evaluator;
-	private ArrayList<double[]> grid;
+	protected WindFarmLayoutEvaluator evaluator;
+	protected ArrayList<double[]> grid;
 	
 	//Ga parameters
-	private Population childPopulation;
-	private Population adultPopulation;
-	private Population parentPopulation;
-	private AdultSelection adultSelection;
-	private ParentSelection parentSelection;
-	private Crossover crossover;
-	private Mutation mutation;
+	protected Population childPopulation;
+	protected Population adultPopulation;
+	protected Population parentPopulation;
+	protected AdultSelection adultSelection;
+	protected ParentSelection parentSelection;
+	protected Crossover crossover;
+	protected Mutation mutation;
 	
 	
 	public GeneticAlgorithm(WindFarmLayoutEvaluator evaluator, int populationSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate){
@@ -84,6 +84,7 @@ public class GeneticAlgorithm {
 			childPopulation = mutation.inversionMutation(childPopulation);
 			childPopulation = mutation.interchangeMutation(childPopulation);
 			childPopulation = mutation.reversingMutation(childPopulation);
+			childPopulation = mutation.elitism(childPopulation, parentPopulation);
 			
 			//Generations
 			run += 1;

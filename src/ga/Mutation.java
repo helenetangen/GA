@@ -80,5 +80,19 @@ public class Mutation {
 		return childPopulation;
 	}
 	
+	
+	public Population elitism(Population childPopulation, Population parentPopulation){
+		Random random = new Random();
+		Individual bestIndividual = parentPopulation.get(0);
+		for (int i = 0; i < parentPopulation.size(); i++){
+			if (parentPopulation.get(i).getFitness() < bestIndividual.getFitness()){
+				bestIndividual = parentPopulation.get(i);
+			}
+		}
+		int position = random.nextInt(parentPopulation.size());
+		childPopulation.set(position, bestIndividual.copy());
+		return childPopulation;
+	}
+	
 
 }

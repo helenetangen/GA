@@ -5,12 +5,10 @@ public abstract class Crossover {
 	
 	
 	protected double crossoverRate;
-	protected boolean elitism;
 	
 	
-	public Crossover(double crossoverRate, boolean elitism){
+	public Crossover(double crossoverRate){
 		this.crossoverRate = crossoverRate;
-		this.elitism = elitism;
 	}
 	
 	

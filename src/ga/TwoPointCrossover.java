@@ -8,8 +8,8 @@ import java.util.Random;
 public class TwoPointCrossover extends Crossover{
 
 	
-	public TwoPointCrossover(double crossoverRate, boolean elitism) {
-		super(crossoverRate, elitism);
+	public TwoPointCrossover(double crossoverRate) {
+		super(crossoverRate);
 	}
 
 	
@@ -50,18 +50,6 @@ public class TwoPointCrossover extends Crossover{
 				childPopulation.add(new Individual(parentTwo.copyGenotype()));
 			}
 		}
-		
-		if (elitism){
-			Individual bestIndividual = parentPopulation.get(0);
-			for (int i = 0; i < parentPopulation.size(); i++){
-				if (parentPopulation.get(i).getFitness() < bestIndividual.getFitness()){
-					bestIndividual = parentPopulation.get(i);
-				}
-			}
-			int position = random.nextInt(parentPopulation.size());
-			childPopulation.set(position, bestIndividual.copy());
-		}
-		
 		return new Population(childPopulation);
 	}
 	
