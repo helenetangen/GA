@@ -8,7 +8,7 @@ public class Individual implements Comparable<Individual>{
 
 	
 	private boolean[] genotype;
-	private double fitness;
+	private volatile double  fitness;
 	
 	
 	public Individual(int size){

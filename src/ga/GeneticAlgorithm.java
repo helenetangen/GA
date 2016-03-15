@@ -53,7 +53,9 @@ public class GeneticAlgorithm {
 			System.out.println("Generation: " + run);
 			
 			//Calculate fitness
-			childPopulation.evaluate(evaluator, grid);
+			System.out.println("%%%%%%Before evaluate");
+			childPopulation.evaluateParallell(evaluator, grid);
+			System.out.println("%%%%%%After evaluate");
 			averageFitness.add(childPopulation.calculateAverageFitness());
 			bestFitness.add(childPopulation.calculateBestFitness());
 			worstFitness.add(childPopulation.calculateWorstFitness());
@@ -90,7 +92,7 @@ public class GeneticAlgorithm {
 			run += 1;
 		}
 		
-		childPopulation.evaluate(evaluator, grid);
+		childPopulation.evaluateParallell(evaluator, grid);
 		childPopulation.printAverageFitness();
 		averageFitness.add(childPopulation.calculateAverageFitness());
 		bestFitness.add(childPopulation.calculateBestFitness());
