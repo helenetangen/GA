@@ -15,8 +15,8 @@ public class main {
 			
 			//Parameters
 			int adultPopulationSize  = 100;
-			int parentPopulationSize = 200;
-			int childPopulationSize  = 200;
+			int parentPopulationSize = 100;
+			int childPopulationSize  = 100;
 			int generations = 100;
 			
 			//Crossover
@@ -31,8 +31,8 @@ public class main {
 			
 			//Adult selection:
 			//AdultSelection adultSelection = new FullGenerationalReplacement();
-			AdultSelection adultSelection = new OverProduction(adultPopulationSize);
-			//AdultSelection adultSelection = new GenerationalMixing(adultPopulationSize);
+			//AdultSelection adultSelection = new OverProduction(adultPopulationSize);
+			AdultSelection adultSelection = new GenerationalMixing(adultPopulationSize);
 			
 			//Parent selection
 			int tournamentSize = 4; 	
