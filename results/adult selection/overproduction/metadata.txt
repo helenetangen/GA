@@ -1,0 +1,17 @@
+Parameter values:
+
+Wind Scenario            : 00.xml
+Evaluator                : KusiakLayoutEvaluator
+Adult Population Size    : 100
+Parent Population Size   : 200
+Child Population Size    : 200
+Generations              : 100
+Crossover Rate           : 0.9
+Elitism                  : true
+Flip Mutation Rate       : 0.01
+Inversion Mutation Rate  : 0.0
+Interchange Mutation Rate: 0.0
+Reversing Mutation Rate  : 0.0
+Tournament size          : 4
+Parent Selection         : Tournament Selection
+Crossover Method         : Uniform
