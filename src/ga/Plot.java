@@ -45,6 +45,9 @@ public class Plot {
 		min     = new double[GENERATIONS];
 		for (int i = 0; i < GENERATIONS; i++){
 			x[i] = i;
+			average[i] = 0.0;
+			max[i] = 0.0;
+			min[i] = 0.0;
 		}
 		
 		String filenameAverage;
@@ -86,9 +89,16 @@ public class Plot {
 			    String[] tableMax     = stringMax.split(",");
 			    String[] tableMin     = stringMin.split(",");
 			    for (int k  = 0; k <GENERATIONS; k++){
-			    	average[k] = (average[k] + Double.parseDouble(tableAverage[k])) / 2;
-			    	max[k]     = (max[k] + Double.parseDouble(tableMax[k])) / 2;
-			    	min[k]     = (min[k] + Double.parseDouble(tableMin[k])) / 2;
+			    	if (i == 0){
+			    		average[k] = Double.parseDouble(tableAverage[k]);
+				    	max[k]     = Double.parseDouble(tableMax[k]);
+				    	min[k]     = Double.parseDouble(tableMin[k]);
+			    	}
+			    	else{
+			    		average[k] = (average[k] + Double.parseDouble(tableAverage[k])) / 2.0;
+				    	max[k]     = (max[k] + Double.parseDouble(tableMax[k])) / 2.0;
+				    	min[k]     = (min[k] + Double.parseDouble(tableMin[k])) / 2.0;
+			    	}
 			    }
 			} finally {
 				bufferedReaderAverage.close();
