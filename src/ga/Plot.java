@@ -15,7 +15,7 @@ import org.math.plot.Plot2DPanel;
 public class Plot {
 	
 	
-	public static final int NUMBER_OF_FILES = 2;
+	public static final int NUMBER_OF_FILES = 9;
 	public static final int GENERATIONS = 101;
 	public static final int FRAME_WIDTH  = 500;
 	public static final int FRAME_HEIGHT = 500;
@@ -24,6 +24,9 @@ public class Plot {
 	public double[] average;
 	public double[] max;
 	public double[] min;
+	
+	public String path = "results/adult selection/overproduction/";
+	public String frameName = "Overproduction";
 	
 	
 	public static void main(String[] args){
@@ -48,9 +51,9 @@ public class Plot {
 		String filenameMax;
 		String filenameMin;
 		for (int i = 0; i < NUMBER_OF_FILES; i++){
-			filenameAverage = "results/average" + i;
-			filenameMax     = "results/worst" + i;
-			filenameMin     = "results/best" + i;
+			filenameAverage = path + "average" + i;
+			filenameMax     = path + "worst" + i;
+			filenameMin     = path + "best" + i;
 			
 			BufferedReader bufferedReaderAverage = new BufferedReader(new FileReader(filenameAverage));
 			BufferedReader bufferedReaderMax     = new BufferedReader(new FileReader(filenameMax));
@@ -82,7 +85,7 @@ public class Plot {
 			    String[] tableAverage = stringAverage.split(",");
 			    String[] tableMax     = stringMax.split(",");
 			    String[] tableMin     = stringMin.split(",");
-			    for (int k  = 0; k < tableAverage.length; k++){
+			    for (int k  = 0; k <GENERATIONS; k++){
 			    	average[k] = (average[k] + Double.parseDouble(tableAverage[k])) / 2;
 			    	max[k]     = (max[k] + Double.parseDouble(tableMax[k])) / 2;
 			    	min[k]     = (min[k] + Double.parseDouble(tableMin[k])) / 2;
@@ -94,7 +97,7 @@ public class Plot {
 			}
 			
 		}
-		JFrame frame = new JFrame("Adult Selection");
+		JFrame frame = new JFrame(frameName);
 		frame.setLayout(new BorderLayout());
 
 		
