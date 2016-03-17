@@ -15,7 +15,7 @@ import org.math.plot.Plot2DPanel;
 public class Plot {
 	
 	
-	public static final int NUMBER_OF_FILES = 9;
+	public static final int NUMBER_OF_FILES = 10;
 	public static final int GENERATIONS = 101;
 	public static final int FRAME_WIDTH  = 500;
 	public static final int FRAME_HEIGHT = 500;
@@ -46,8 +46,8 @@ public class Plot {
 		for (int i = 0; i < GENERATIONS; i++){
 			x[i] = i;
 			average[i] = 0.0;
-			max[i] = 0.0;
-			min[i] = 0.0;
+			max[i]     = 0.0;
+			min[i]     = 0.0;
 		}
 		
 		String filenameAverage;

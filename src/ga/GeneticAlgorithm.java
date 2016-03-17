@@ -57,7 +57,7 @@ public class GeneticAlgorithm {
 			averageFitness.add(childPopulation.calculateAverageFitness());
 			bestFitness.add(childPopulation.calculateBestFitness());
 			worstFitness.add(childPopulation.calculateWorstFitness());
-			//childPopulation.printPopulation("Child population");
+			childPopulation.printPopulation("Child population");
 			//writeResults("average", Double.toString(childPopulation.calculateAverageFitness()));
 			
 			System.out.print("Child population : ");
@@ -66,14 +66,14 @@ public class GeneticAlgorithm {
 			
 			//Adult Selection
 			adultPopulation = adultSelection.select(childPopulation, adultPopulation);
-			//adultPopulation.printPopulation("Adult population");
+			adultPopulation.printPopulation("Adult population");
 			//System.out.print("Adult population : ");
 			//adultPopulation.printAverageFitness();
 			//adultPopulation.printBestFitness();
 			
 			//Parent Selection
 			parentPopulation = parentSelection.select(adultPopulation);
-			//parentPopulation.printPopulation("Parent population");
+			parentPopulation.printPopulation("Parent population");
 			//System.out.print("Parent population: ");
 			//parentPopulation.printAverageFitness();
 			//parentPopulation.printBestFitness();

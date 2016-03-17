@@ -50,10 +50,10 @@ public class Population{
 		System.out.println();
 		System.out.println(populationName + ": ");
 		for (int i = 0; i < population.size(); i++){
-			System.out.print("Genotype: ");
+/*			System.out.print("Genotype: ");
 			for (int j = 0; j < population.get(i).getGenotype().length; j++){
 				System.out.print(population.get(i).getGeneAsInteger(j) + " ");
-			}
+			}*/
 			System.out.print("  Fitness: " + population.get(i).getFitness());
 			System.out.println();
 		}
@@ -180,7 +180,7 @@ public class Population{
 		for (int i = 0; i < cores; i++) {
 			start = end;
 			end   = end + interval;
-			if (end > population.size()){
+			if (i == (cores - 1)){
 				end = population.size();
 			}
 			threads[i] = new Thread(new Evaluator(start, end, grid, this));
