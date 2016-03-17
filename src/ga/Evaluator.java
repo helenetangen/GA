@@ -34,7 +34,6 @@ public class Evaluator implements Runnable{
 	
 	
 	public void run() {
-		System.out.println("Running thread");
 		for (int p = start; p < end; p++){
 			int turbineCount = 0;
 			for (int i = 0; i < population.get(0).size(); i++){

@@ -174,7 +174,6 @@ public class Population{
 		int start = 0;
 		int end   = 0;
 		int cores   = Runtime.getRuntime().availableProcessors();
-		System.out.println("Number of cores: " + cores);
 		int interval = population.size() / cores; // = 3
 		Thread[] threads = new Thread[cores];
 		int index = 0;
@@ -184,9 +183,6 @@ public class Population{
 			if (end > population.size()){
 				end = population.size();
 			}
-			System.out.println("Start: " + start);
-			System.out.println("End  : " + end);
-			System.out.println("Making new thread");
 			threads[i] = new Thread(new Evaluator(start, end, grid, this));
 		}
 		for (int i = 0; i < cores; i++){
@@ -195,9 +191,8 @@ public class Population{
 		for (int i = 0; i < cores; i++){
 			try {
 				threads[i].join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} catch (InterruptedException exception) {
+				exception.printStackTrace();
 			}
 		}
 	}

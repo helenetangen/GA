@@ -14,10 +14,10 @@ public class main {
 			evaluator.initialize(windScenario);
 			
 			//Parameters
-			int adultPopulationSize  = 80;
-			int parentPopulationSize = 80;
-			int childPopulationSize  = 80;
-			int generations = 10;
+			int adultPopulationSize  = 100;
+			int parentPopulationSize = 200;
+			int childPopulationSize  = 200;
+			int generations = 100;
 			
 			//Crossover
 			double crossoverRate = 0.9;
@@ -30,8 +30,8 @@ public class main {
 			double reversingMutationRate   = 0.0;
 			
 			//Adult selection:
-			AdultSelection adultSelection = new FullGenerationalReplacement();
-			//AdultSelection adultSelection = new OverProduction(adultPopulationSize);
+			//AdultSelection adultSelection = new FullGenerationalReplacement();
+			AdultSelection adultSelection = new OverProduction(adultPopulationSize);
 			//AdultSelection adultSelection = new GenerationalMixing(adultPopulationSize);
 			
 			//Parent selection
