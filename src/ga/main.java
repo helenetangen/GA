@@ -21,7 +21,7 @@ public class main {
 			
 			//Crossover
 			double crossoverRate = 0.9;
-			boolean elitism      = true;
+			boolean elitism      = false;
 			
 			//Mutation
 			double flipMutationRate        = 0.01;
@@ -37,6 +37,7 @@ public class main {
 			//Parent selection
 			int tournamentSize = 4; 	
 			ParentSelection parentSelection = new TournamentSelection(parentPopulationSize, tournamentSize);
+			//ParentSelection parentSelection = new RouletteWheel(parentPopulationSize);
 			
 			//Crossover method
 			//Crossover crossover = new SinglePointCrossover(crossoverRate, elitism);
@@ -47,6 +48,30 @@ public class main {
 			for (int i = 0; i < simulations; i++){
 				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
 				ga.run(generations,  i);
+			}
+			
+			int simulations2 = 11;
+			for (int i = simulations; i < simulations2; i++){
+				tournamentSize = 5;
+				parentSelection = new TournamentSelection(parentPopulationSize, tournamentSize);
+				GeneticAlgorithm ga2 = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
+				ga2.run(generations,  i);
+			}
+			
+			int simulations3 = 21;
+			for (int i = simulations2; i < simulations3; i++){
+				tournamentSize = 10;
+				parentSelection = new TournamentSelection(parentPopulationSize, tournamentSize);
+				GeneticAlgorithm ga3 = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
+				ga3.run(generations,  i);
+			}
+			
+			int simulations4 = 31;
+			for (int i = simulations3; i < simulations4; i++){
+				tournamentSize = 15;
+				parentSelection = new TournamentSelection(parentPopulationSize, tournamentSize);
+				GeneticAlgorithm ga4 = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
+				ga4.run(generations,  i);
 			}
 			
 			

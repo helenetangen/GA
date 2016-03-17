@@ -21,7 +21,7 @@ public class Evaluator implements Runnable{
 			this.evaluator = new KusiakLayoutEvaluator();
 			this.evaluator.initialize(windScenario);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			//TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
