@@ -66,16 +66,16 @@ public class GeneticAlgorithm {
 			
 			//Adult Selection
 			adultPopulation = adultSelection.select(childPopulation, adultPopulation);
-			adultPopulation.printPopulation("Adult population");
-			System.out.print("Adult population : ");
-			adultPopulation.printAverageFitness();
+			//adultPopulation.printPopulation("Adult population");
+			//System.out.print("Adult population : ");
+			//adultPopulation.printAverageFitness();
 			//adultPopulation.printBestFitness();
 			
 			//Parent Selection
 			parentPopulation = parentSelection.select(adultPopulation);
-			parentPopulation.printPopulation("Parent population");
-			System.out.print("Parent population: ");
-			parentPopulation.printAverageFitness();
+			//parentPopulation.printPopulation("Parent population");
+			//System.out.print("Parent population: ");
+			//parentPopulation.printAverageFitness();
 			//parentPopulation.printBestFitness();
 			
 			//Child generations
