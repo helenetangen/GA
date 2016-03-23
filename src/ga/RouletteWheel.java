@@ -34,11 +34,7 @@ public class RouletteWheel implements ParentSelection{
 		}
 		scaledFitness[adultPopulation.size() - 1] = 1.0;
 		
-		
-		System.out.println();
-		for (int i = 0; i < adultPopulation.size(); i++){	
-			System.out.println(scaledFitness[i]);
-		}
+	
 
 		
 		Random random = new Random();
