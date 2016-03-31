@@ -15,7 +15,7 @@ import org.math.plot.Plot2DPanel;
 public class Plot {
 	
 	
-	public static final int NUMBER_OF_FILES = 2;
+	public static final int NUMBER_OF_FILES = 10;
 	public static final int GENERATIONS = 101;
 	public static final int FRAME_WIDTH  = 500;
 	public static final int FRAME_HEIGHT = 500;
@@ -25,8 +25,8 @@ public class Plot {
 	public double[] max;
 	public double[] min;
 	
-	public String path = "results/crossover rate/crossover rate 0.4/";
-	public String frameName = "Crossover Rate 0.4";
+	public String path = "results/parent selection/tournament selection/tournament size 25/";
+	public String frameName = "Tournament Selection Size 25";
 	
 	
 	public static void main(String[] args){
@@ -115,7 +115,6 @@ public class Plot {
 		plot.addLinePlot("Average", Color.BLUE, x, average);
 		plot.addLinePlot("Maximum", Color.RED, x, max);
 		plot.addLinePlot("Minimum", Color.GREEN, x, min);
-		plot.setBounds(0, 0, 0, 100);
 		frame.add(plot);
 
 		
