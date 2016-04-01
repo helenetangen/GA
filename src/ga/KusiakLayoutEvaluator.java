@@ -22,6 +22,46 @@ public class KusiakLayoutEvaluator extends WindFarmLayoutEvaluator {
 		this.scenario=scenario;
                 energyCost=Double.MAX_VALUE;
 	}
+	
+	
+	public double[] evaluateEverything(double[][] layout){
+	    double results[] = new double[4];
+	    double totalPower;
+	    double efficiency;
+	    double turbineNr;
+	    double totalCost;
+		
+		final double ct  = 750000;
+	    final double cs  = 8000000;
+	    final double m   = 30;
+	    final double r   = 0.03;
+	    final double y   = 20;
+	    final double com = 20000;
+
+	    double wfr = evaluate_2014(layout);
+	    int n = layout.length;
+	    
+	    
+	    energyCost = (((ct*n+cs*Math.floor(n/m))*(0.666667+0.333333*Math.exp(-0.00174*n*n))+com*n)/
+		    ((1-Math.pow(1+r, -y))/r)/(8760.0*scenario.wakeFreeEnergy*wfr*n))+0.1/n;
+
+	    totalPower = 8760.0*scenario.wakeFreeEnergy*wfr*n;
+	    efficiency = totalPower / scenario.wakeFreeEnergy;
+	    turbineNr  = n;
+	    
+	    double constructionCost    = ct*n+cs*Math.floor(n/m);
+	    double economyOfScale      = 0.666667+0.333333*Math.exp(-0.00174*n*n);
+	    double yearlyOperatingCost = com*n;
+	    double interests           = (1-Math.pow(1+r, -y))/r;
+	    totalCost  = (constructionCost * economyOfScale + yearlyOperatingCost) / interests;
+	   
+	    results[0] = totalPower;
+	    results[1] = efficiency;
+	    results[2] = turbineNr;
+	    results[3] = totalCost;
+	   
+	    return results;
+	}
 
         @Override
 	public double evaluate(double[][] layout) {

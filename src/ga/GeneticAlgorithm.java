@@ -44,9 +44,10 @@ public class GeneticAlgorithm {
 	
 	public void run(int generations, int simulation){
 		System.out.println("Simulation: " + simulation);
-		ArrayList<Double> averageFitness = new ArrayList<Double>();
-		ArrayList<Double> bestFitness    = new ArrayList<Double>();
-		ArrayList<Double> worstFitness   = new ArrayList<Double>();
+		ArrayList<Double> averageFitness   = new ArrayList<Double>();
+		ArrayList<Double> bestFitness      = new ArrayList<Double>();
+		ArrayList<Double> worstFitness     = new ArrayList<Double>();
+		ArrayList<double[][]> bestLayouts  = new ArrayList<double[][]>();;
 		
 		int run = 0;
 		while (run < generations){
@@ -57,6 +58,7 @@ public class GeneticAlgorithm {
 			averageFitness.add(childPopulation.calculateAverageFitness());
 			bestFitness.add(childPopulation.calculateBestFitness());
 			worstFitness.add(childPopulation.calculateWorstFitness());
+			bestLayouts.add(childPopulation.getBestLayout(grid));
 			//childPopulation.printPopulation("Child population");
 			//writeResults("average", Double.toString(childPopulation.calculateAverageFitness()));
 			
@@ -95,12 +97,15 @@ public class GeneticAlgorithm {
 		averageFitness.add(childPopulation.calculateAverageFitness());
 		bestFitness.add(childPopulation.calculateBestFitness());
 		worstFitness.add(childPopulation.calculateWorstFitness());
+		bestLayouts.add(childPopulation.getBestLayout(grid));
 		String fileNameAverage = "average" + simulation;
 		String fileNameBest    = "best" + simulation;
 		String fileNameWorst   = "worst" + simulation;
+		String fileNameLayouts  = "" + simulation;
 		writeResults(fileNameAverage, averageFitness);
 		writeResults(fileNameBest, bestFitness);
 		writeResults(fileNameWorst, worstFitness);
+		writeMoreResults(fileNameLayouts, bestLayouts);
 	}
 	
 	
@@ -149,6 +154,24 @@ public class GeneticAlgorithm {
         	}
         	
         }
+	}
+	
+	
+
+	public void writeMoreResults(String filename, ArrayList<double[][]> layouts){
+		String totalPower = "totalPower" + filename;
+		String efficiency = "efficiency" + filename;
+		String turbineNr  = "turbineNr"  + filename;
+		String totalCost  = "totalCost"  + filename;
+		
+		ArrayList<Double> totalPowerList = new ArrayList<Double>();
+		ArrayList<Double> effciencyList  = new ArrayList<Double>();
+		ArrayList<Double> turbineNrList  = new ArrayList<Double>();
+		ArrayList<Double> totalCostList  = new ArrayList<Double>();
+		
+		for (int i = 0; i < layouts.size(); i++){
+			
+		}
 	}
 	
 	

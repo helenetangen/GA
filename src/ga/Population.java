@@ -196,6 +196,33 @@ public class Population{
 			}
 		}
 	}
+	
+	
+	public double[][] getBestLayout(ArrayList<double[]> grid){
+		Individual bestIndividual = new Individual(0);
+		double bestFitness        = Double.MAX_VALUE;
+		for (int i = 0; i < population.size(); i++){
+			if (population.get(i).getFitness() < bestFitness){
+				bestFitness    = population.get(i).getFitness();
+				bestIndividual = population.get(i);
+			}
+		}
+		int turbineCount = 0;
+		for (int i = 0; i < bestIndividual.size(); i++){
+			if (bestIndividual.getGene(i))
+				turbineCount++;
+		}
+		double[][] layout = new double[turbineCount][2];
+		int j = 0;
+		for (int i = 0; i < grid.size(); i++){
+			if (bestIndividual.getGene(i)){
+				layout[j][0] = grid.get(i)[0];
+				layout[j][1] = grid.get(i)[1];
+				j++;
+			}
+		} 
+		return layout;
+	}
 
 
 }

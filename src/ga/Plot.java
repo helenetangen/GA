@@ -15,7 +15,7 @@ import org.math.plot.Plot2DPanel;
 public class Plot {
 	
 	
-	public static final int NUMBER_OF_FILES = 10;
+	public static final int NUMBER_OF_FILES = 5;
 	public static final int GENERATIONS = 101;
 	public static final int FRAME_WIDTH  = 500;
 	public static final int FRAME_HEIGHT = 500;
@@ -25,8 +25,8 @@ public class Plot {
 	public double[] max;
 	public double[] min;
 	
-	public String path = "results/parent selection/tournament selection/tournament size 25/";
-	public String frameName = "Tournament Selection Size 25";
+	public String path = "results/mutation rate/mutation rate 0.01/";
+	public String frameName = "Mutation Rate 0.01";
 	
 	
 	public static void main(String[] args){
