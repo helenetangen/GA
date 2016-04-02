@@ -25,8 +25,8 @@ public class Plot {
 	public double[] max;
 	public double[] min;
 	
-	public String path = "results/mutation rate/mutation rate 0.01/";
-	public String frameName = "Mutation Rate 0.01";
+	public String path = "results/mutation rate/mutation rate 0.0005/";
+	public String frameName = "Mutation Rate 0.0005";
 	
 	
 	public static void main(String[] args){

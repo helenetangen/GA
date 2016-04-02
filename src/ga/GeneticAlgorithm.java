@@ -105,7 +105,7 @@ public class GeneticAlgorithm {
 		writeResults(fileNameAverage, averageFitness);
 		writeResults(fileNameBest, bestFitness);
 		writeResults(fileNameWorst, worstFitness);
-		writeMoreResults(fileNameLayouts, bestLayouts);
+		writeMoreResults(fileNameLayouts, bestLayouts, evaluator);
 	}
 	
 	
@@ -158,20 +158,63 @@ public class GeneticAlgorithm {
 	
 	
 
-	public void writeMoreResults(String filename, ArrayList<double[][]> layouts){
+	public void writeMoreResults(String filename, ArrayList<double[][]> layouts, WindFarmLayoutEvaluator evaluator){
+		
+		
+		ArrayList<Double> totalPowerList  = new ArrayList<Double>();
+		ArrayList<Double> efficiencyList  = new ArrayList<Double>();
+		ArrayList<Double> turbineNrList   = new ArrayList<Double>();
+		ArrayList<Double> totalCostList   = new ArrayList<Double>();
+		
+		for (int i = 0; i < layouts.size(); i++){
+			double[] results = evaluator.evaluateEverything(layouts.get(i));
+			totalPowerList.add(results[0]);
+			efficiencyList.add(results[1]);
+			turbineNrList.add(results[2]);
+			totalCostList.add(results[3]);
+		}
+		
 		String totalPower = "totalPower" + filename;
 		String efficiency = "efficiency" + filename;
 		String turbineNr  = "turbineNr"  + filename;
 		String totalCost  = "totalCost"  + filename;
 		
-		ArrayList<Double> totalPowerList = new ArrayList<Double>();
-		ArrayList<Double> effciencyList  = new ArrayList<Double>();
-		ArrayList<Double> turbineNrList  = new ArrayList<Double>();
-		ArrayList<Double> totalCostList  = new ArrayList<Double>();
-		
-		for (int i = 0; i < layouts.size(); i++){
-			
-		}
+		FileWriter fwTotalPower = null;
+		FileWriter fwEfficiency = null;
+		FileWriter fwTurbineNr  = null;
+		FileWriter fwTotalCost  = null;
+        try {
+        	File fileTotalPower = new File(totalPower);
+        	File fileEfficiency = new File(efficiency);
+        	File fileTurbineNr  = new File(turbineNr);
+        	File fileTotalCost  = new File(totalCost);
+        	
+        
+        	fwTotalPower = new FileWriter(fileTotalPower, true);
+        	fwEfficiency = new FileWriter(fileEfficiency, true);
+        	fwTurbineNr  = new FileWriter(fileTurbineNr, true);
+        	fwTotalCost  = new FileWriter(fileTotalCost, true);
+        	
+        	for (int i = 0; i < totalPowerList.size(); i++){
+        		fwTotalPower.write(Double.toString(totalPowerList.get(i)) + ",");
+        		fwEfficiency.write(Double.toString(efficiencyList.get(i)) + ",");
+        		fwTurbineNr.write(Double.toString(turbineNrList.get(i)) + ",");
+        		fwTotalCost.write(Double.toString(totalCostList.get(i)) + ",");
+        	}
+		} catch (IOException exception) {
+		  exception.printStackTrace();
+		} 
+        finally{
+        	try{
+        		fwTotalPower.close();
+        		fwEfficiency.close();
+        		fwEfficiency.close();
+        		fwTotalCost.close();
+        	}catch(Exception exception){
+        		exception.printStackTrace();
+        	}
+        	
+        }
 	}
 	
 	

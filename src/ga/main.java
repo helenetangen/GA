@@ -45,53 +45,31 @@ public class main {
 			Crossover crossover   = new UniformCrossover(crossoverRate);
 			
 			
-			//Mutation rate 0.001
+			//Mutation rate 0.0005
 			int simulations = 5;
 			for (int i = 0; i < simulations; i++){
-				flipMutationRate = 0.001;
+				flipMutationRate = 0.0005;
 				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
 				ga.run(generations,  i);
 			}
 			
-			//Mutation rate 0.005
+			//Mutation rate 0.0001
 			int simulations2 = 10;
 			for (int i = simulations; i < simulations2; i++){
-				flipMutationRate = 0.005;
+				flipMutationRate = 0.0001;
 				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
 				ga.run(generations,  i);
 			}
 			
-			//Mutation rate 0.01
-			int simulations3  = 15;
+			//Mutation rate 0.00005
+			int simulations3 = 10;
 			for (int i = simulations2; i < simulations3; i++){
-				flipMutationRate = 0.01;
+				flipMutationRate = 0.00005;
 				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
 				ga.run(generations,  i);
 			}
 			
-			//Mutation rate 0.05
-			int simulations4  = 20;
-			for (int i = simulations3; i < simulations4; i++){
-				flipMutationRate = 0.05;
-				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
-				ga.run(generations,  i);
-			}
-			
-			//Mutation rate 0.1
-			int simulations5  = 25;
-			for (int i = simulations4; i < simulations5; i++){
-				flipMutationRate = 0.1;
-				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
-				ga.run(generations,  i);
-			}
-			
-			//Mutation rate 0.2
-			int simulations6  = 25;
-			for (int i = simulations5; i < simulations6; i++){
-				flipMutationRate = 0.2;
-				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
-				ga.run(generations,  i);
-			}
+
 			
 
 			

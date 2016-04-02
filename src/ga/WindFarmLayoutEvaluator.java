@@ -22,6 +22,10 @@ public abstract class WindFarmLayoutEvaluator {
 	 */
 	public abstract double evaluate(double[][] layout);
 
+	
+	public abstract double[] evaluateEverything(double[][] layout);
+	
+	
 	/**
 	 * Returns the energy outputs per wind turbine and per direction of the last
 	 * layout evaluated, ordered as in the layout vector provided to the
