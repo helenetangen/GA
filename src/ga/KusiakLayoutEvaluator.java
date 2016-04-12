@@ -45,10 +45,11 @@ public class KusiakLayoutEvaluator extends WindFarmLayoutEvaluator {
 	    energyCost = (((ct*n+cs*Math.floor(n/m))*(0.666667+0.333333*Math.exp(-0.00174*n*n))+com*n)/
 		    ((1-Math.pow(1+r, -y))/r)/(8760.0*scenario.wakeFreeEnergy*wfr*n))+0.1/n;
 
-	    totalPower = 8760.0*scenario.wakeFreeEnergy*wfr*n;
-	    efficiency = totalPower / scenario.wakeFreeEnergy;
-	    turbineNr  = n;
 	    
+	    totalPower = 8760.0*scenario.wakeFreeEnergy*wfr*n;
+	    efficiency = wfr;
+	    turbineNr  = (double) n;
+	
 	    double constructionCost    = ct*n+cs*Math.floor(n/m);
 	    double economyOfScale      = 0.666667+0.333333*Math.exp(-0.00174*n*n);
 	    double yearlyOperatingCost = com*n;

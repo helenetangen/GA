@@ -208,7 +208,7 @@ public class GeneticAlgorithm {
         	try{
         		fwTotalPower.close();
         		fwEfficiency.close();
-        		fwEfficiency.close();
+        		fwTurbineNr.close();
         		fwTotalCost.close();
         	}catch(Exception exception){
         		exception.printStackTrace();

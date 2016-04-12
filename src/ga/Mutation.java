@@ -57,9 +57,16 @@ public class Mutation {
 				System.out.println("Child " + i + " is inversed.");
 				int positionOne = random.nextInt(childPopulation.get(0).getGenotype().length);
 				int positionTwo = random.nextInt(childPopulation.get(0).getGenotype().length);
-				boolean temporary = childPopulation.get(i).getGene(positionOne);
-				childPopulation.get(i).getGenotype()[positionOne] = childPopulation.get(i).getGenotype()[positionTwo];
-				childPopulation.get(i).getGenotype()[positionTwo] = temporary;
+				if (positionOne > positionTwo){
+					int temp = positionOne;
+					positionOne = positionTwo;
+					positionTwo = temp;
+				}
+				for (int j = positionOne; j < positionTwo; j++){
+					boolean temporary = childPopulation.get(i).getGene(positionOne);
+					childPopulation.get(i).getGenotype()[positionOne] = childPopulation.get(i).getGene(positionTwo);
+					childPopulation.get(i).getGenotype()[positionTwo] = temporary;
+				}
 			}
 		}
 		return childPopulation;
