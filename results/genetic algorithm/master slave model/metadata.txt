@@ -1,17 +1,21 @@
-Parameter values:
+KusiakEvaluator: KusiakEvaluator
+adultPopulationSize: 100
+parentPopulationSize: 200
+childPopulationSize: 200
+generations: 200
+crossoverRate: 0.9
+elitism: true
+flipMutationRate: 0.001
+inversionMutaitonRate: 0.000001
+interchangeMutationRate: 0.000001
+adultSelectioni: Overproduction
+tournamentSize: 20
+epsilon: 0.1
+parentSelection: tournamentselection
+crossover: uniformCrossover
 
-Wind Scenario            : 00.xml
-Evaluator                : KusiakLayoutEvaluator
-Adult Population Size    : 100
-Parent Population Size   : 200
-Child Population Size    : 200
-Generations              : 200
-Elitism                  : true
-Flip Mutation Rate       : 0.001
-Inversion Mutation Rate  : 0.000001
-Interchange Mutation Rate: 0.000001
-Tournament size          : 20
-Adult Selection          : Overproduction
-Parent Selection         : Tournament Selection
-Crossover Method         : Uniform
-
+Scenarios: 
+- 00.xml
+- 05.xml
+- obs_00.xml
+- obs_05.xml
