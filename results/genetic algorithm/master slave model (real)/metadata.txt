@@ -1,0 +1,21 @@
+KusiakEvaluator: KusiakEvaluator
+adultPopulationSize: 100
+parentPopulationSize: 200
+childPopulationSize: 200
+generations: 200
+crossoverRate: 0.9
+elitism: true
+flipMutationRate: 0.001
+inversionMutaitonRate: 0.000001
+interchangeMutationRate: 0.000001
+adultSelectioni: Overproduction
+tournamentSize: 20
+epsilon: 0.1
+parentSelection: tournamentselection
+crossover: uniformCrossover
+
+Scenarios: 
+- 00.xml
+- 05.xml
+- obs_00.xml
+- obs_05.xml

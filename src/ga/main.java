@@ -49,26 +49,8 @@ public class main {
 			//Epsilon: 0.05
 
 			
-			int simulations = 10;
-			for (int i = 0; i < simulations; i++){
-				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
-				ga.run(generations,  i);
-			}
-			
-			int simulations1 = 20;
-			for (int i = simulations; i < simulations1; i++){
-				windScenario = new WindScenario("Scenarios/05.xml");
-				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
-				ga.run(generations,  i);
-			}
-			
-			int simulations2 = 30;
-			for (int i = simulations1; i < simulations2; i++){
-				windScenario = new WindScenario("Scenarios/obs_00.xml");
-				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
-				ga.run(generations,  i);
-			}
-			
+
+			int simulations2 = 33;
 			int simulations3 = 40;
 			for (int i = simulations2; i < simulations3; i++){
 				windScenario = new WindScenario("Scenarios/obs_05.xml");
