@@ -14,10 +14,10 @@ public class main {
 			evaluator.initialize(windScenario);
 			
 			//Parameters
-			int adultPopulationSize  = 100;
-			int parentPopulationSize = 200;
-			int childPopulationSize  = 200;
-			int generations = 200;
+			int adultPopulationSize  = 26;
+			int parentPopulationSize = 52;
+			int childPopulationSize  = 52;
+			int generations = 10;
 			
 			//Crossover
 			double crossoverRate = 0.9;
@@ -36,7 +36,7 @@ public class main {
 			//AdultSelection adultSelection = new GenerationalMixing(adultPopulationSize);
 			
 			//Parent selection
-			int tournamentSize = 20; 	
+			int tournamentSize = 4; 	
 			double epsilon = 0.1;
 			ParentSelection parentSelection = new TournamentSelection(parentPopulationSize, tournamentSize, epsilon);
 			//ParentSelection parentSelection = new RouletteWheel(parentPopulationSize);
@@ -46,15 +46,33 @@ public class main {
 			//Crossover crossover = new TwoPointCrossover(crossoverRate);
 			Crossover crossover   = new UniformCrossover(crossoverRate);
 			
-			//Epsilon: 0.05
+			
+			
+			//Island Model
+			int demeCount         = 4;  //Number of Islands
+			int migrationRate     = 2;  //Number of individuals that migrate
+			int migrationInterval = 20; //Generations between migration
 
 			
 
-			int simulations2 = 33;
-			int simulations3 = 40;
+			int simulations1 = 10;
+			for (int i = 0; i < simulations1; i++){
+				windScenario = new WindScenario("Scenarios/05.xml");
+				IslandModel ga = new IslandModel(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate, demeCount, migrationRate, migrationInterval);
+				ga.run(generations,  i);
+			}
+			
+			int simulations2 = 20;
+			for (int i = simulations1; i < simulations2; i++){
+				windScenario = new WindScenario("Scenarios/obs_00.xml");
+				IslandModel ga = new IslandModel(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate, demeCount, migrationRate, migrationInterval);
+				ga.run(generations,  i);
+			}
+			
+			int simulations3 = 30;
 			for (int i = simulations2; i < simulations3; i++){
 				windScenario = new WindScenario("Scenarios/obs_05.xml");
-				GeneticAlgorithm ga = new GeneticAlgorithm(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
+				IslandModel ga = new IslandModel(evaluator, childPopulationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate, demeCount, migrationRate, migrationInterval);
 				ga.run(generations,  i);
 			}
 			

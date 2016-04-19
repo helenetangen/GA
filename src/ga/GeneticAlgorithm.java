@@ -42,7 +42,7 @@ public class GeneticAlgorithm {
 	}
 	
 	
-	public void run(int generations, int simulation){
+	public void run(int generations, int simulation, int island, int round){
 		System.out.println("Simulation: " + simulation);
 		ArrayList<Double> averageFitness   = new ArrayList<Double>();
 		ArrayList<Double> bestFitness      = new ArrayList<Double>();
@@ -62,7 +62,7 @@ public class GeneticAlgorithm {
 			//childPopulation.printPopulation("Child population");
 			//writeResults("average", Double.toString(childPopulation.calculateAverageFitness()));
 			
-			System.out.print("Child population : ");
+			System.out.println("Average fitness island " + island + " round " + round);
 			childPopulation.printAverageFitness();
 			//childPopulation.printBestFitness();
 			
@@ -98,10 +98,18 @@ public class GeneticAlgorithm {
 		bestFitness.add(childPopulation.calculateBestFitness());
 		worstFitness.add(childPopulation.calculateWorstFitness());
 		bestLayouts.add(childPopulation.getBestLayout(grid));
-		String fileNameAverage = "average" + simulation;
-		String fileNameBest    = "best" + simulation;
-		String fileNameWorst   = "worst" + simulation;
-		String fileNameLayouts  = "" + simulation;
+		//Normal GA
+		//String fileNameAverage = "average" + simulation;
+		//String fileNameBest    = "best" + simulation;
+		//String fileNameWorst   = "worst" + simulation;
+		//String fileNameLayouts = "" + simulation;
+		
+		//Island Model
+		String fileNameAverage   = "average_island_" + island + "_simulation_" + simulation + "_round_" + round;
+		String fileNameBest      = "best_island_" + island + "_simulation_" + simulation+ "_round_" + round;
+		String fileNameWorst     = "worst_island_" + island + "_simulation_" + simulation+ "_round_" + round;
+		String fileNameLayouts   = "island_" + island + "_simulation_"+ simulation + "_round_" + round;
+		
 		writeResults(fileNameAverage, averageFitness);
 		writeResults(fileNameBest, bestFitness);
 		writeResults(fileNameWorst, worstFitness);

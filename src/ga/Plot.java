@@ -15,8 +15,8 @@ import org.math.plot.Plot2DPanel;
 public class Plot {
 	
 	
-	public static final int NUMBER_OF_FILES = 10;
-	public static final int GENERATIONS = 200;
+	public static final int NUMBER_OF_FILES = 1;
+	public static final int GENERATIONS = 20;
 	public static final int FRAME_WIDTH  = 500;
 	public static final int FRAME_HEIGHT = 500;
 	
@@ -30,7 +30,7 @@ public class Plot {
 	public double[] efficiency;
 	public double[] turbines;
 	
-	public String path = "results/genetic algorithm/master slave model (real)/scenario obs 00/";
+	public String path = "results/testisland/";
 	public String frameName = "Fitness";
 	//New
 	public String frameNamePower      = "Power";
@@ -81,14 +81,23 @@ public class Plot {
 		String fileTurbines;
 		
 		for (int i = 0; i < NUMBER_OF_FILES; i++){
-			filenameAverage = path + "average" + i;
-			filenameMax     = path + "worst" + i;
-			filenameMin     = path + "best" + i;
+//			filenameAverage = path + "average" + i;
+//			filenameMax     = path + "worst" + i;
+//			filenameMin     = path + "best" + i;
+//			//New
+//			filePower      = path + "totalPower" + i;
+//			fileCost       = path + "totalCost" + i;
+//			fileEfficiency = path + "efficiency" + i;
+//			fileTurbines   = path + "turbineNr" + i;
+			
+			filenameAverage = path + "average_island_0_simulation_" + i + "_round_10";
+			filenameMax     = path + "worst_island_0_simulation_" + i + "_round_10";
+			filenameMin     = path + "best_island_0_simulation_" + i + "_round_10";
 			//New
-			filePower      = path + "totalPower" + i;
-			fileCost       = path + "totalCost" + i;
-			fileEfficiency = path + "efficiency" + i;
-			fileTurbines   = path + "turbineNr" + i;
+			filePower      = path + "totalPowerisland_0_simulation_" + i + "_round_10";
+			fileCost       = path + "totalCostisland_0_simulation_" + i + "_round_10";
+			fileEfficiency = path + "efficiencyisland_0_simulation_" + i + "_round_10";
+			fileTurbines   = path + "turbineNrisland_0_simulation_" + i + "_round_10";
 			
 			BufferedReader bufferedReaderAverage = new BufferedReader(new FileReader(filenameAverage));
 			BufferedReader bufferedReaderMax     = new BufferedReader(new FileReader(filenameMax));

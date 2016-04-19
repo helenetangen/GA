@@ -21,7 +21,7 @@ public class TournamentSelection implements ParentSelection{
 	}
 	
 	
-	public Population select(Population adultPopulation) {
+/*	public Population select(Population adultPopulation) {
 		List<Individual> parentPopulation = new ArrayList<Individual>();
 		Random random = new Random();
 		for (int i = 0; i < parentPopulationSize; i++){
@@ -37,10 +37,10 @@ public class TournamentSelection implements ParentSelection{
 			parentPopulation.add(new Individual(adultPopulation.get(bestIndex).copyGenotype(), adultPopulation.get(bestIndex).getFitness()));
 		}
 		return new Population(parentPopulation);
-	}
+	}*/
 	
 
-	public Population selectEpsilon(Population adultPopulation) {
+	public Population select(Population adultPopulation) {
 		List<Individual> parentPopulation = new ArrayList<Individual>();
 		Random random = new Random();
 		for (int i = 0; i < parentPopulationSize; i++){
