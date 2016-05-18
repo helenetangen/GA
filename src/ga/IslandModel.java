@@ -16,15 +16,15 @@ public class IslandModel extends GeneticAlgorithm{
     private List<GeneticAlgorithm> islands;
      
      
-    public IslandModel(WindFarmLayoutEvaluator evaluator, int populationSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate,double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate, int demeCount, int migrationRate, int migrationInterval) {
-        super(evaluator, populationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
+    public IslandModel(WindFarmLayoutEvaluator evaluator, int populationSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate,double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate, int demeCount, int migrationRate, int migrationInterval, WindScenario scenario) {
+        super(evaluator, populationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate, scenario);
         this.demeCount = demeCount;
         this.demeSize  = populationSize / demeCount;
         this.migrationRate     = migrationRate;
         this.migrationInterval = migrationInterval;
         this.islands = new ArrayList<GeneticAlgorithm>();
         for (int i = 0; i < demeCount; i++){
-            islands.add(new GeneticAlgorithm(evaluator, populationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate));
+            islands.add(new GeneticAlgorithm(evaluator, populationSize, adultSelection, parentSelection, crossover, crossoverRate, flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate, scenario));
         }
     }
  

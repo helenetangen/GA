@@ -82,7 +82,7 @@ public class Individual implements Comparable<Individual>{
 			return 1;
 		}
 		else if (this.fitness == individual.fitness){
-			return 9;
+			return 0;
 		}
 		else{
 			return -1;

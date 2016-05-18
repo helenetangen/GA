@@ -24,9 +24,10 @@ public class GeneticAlgorithm {
 	protected ParentSelection parentSelection;
 	protected Crossover crossover;
 	protected Mutation mutation;
+	protected WindScenario scenario;
 	
 	
-	public GeneticAlgorithm(WindFarmLayoutEvaluator evaluator, int populationSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate){
+	public GeneticAlgorithm(WindFarmLayoutEvaluator evaluator, int populationSize, AdultSelection adultSelection, ParentSelection parentSelection, Crossover crossover, double crossoverRate, double flipMutationRate, double inversionMutationRate, double interchangeMutationRate, double reversingMutationRate, WindScenario scenario){
 		this.evaluator = evaluator;
 		this.grid = new ArrayList<double[]>();
 		this.makeGrid();
@@ -39,6 +40,7 @@ public class GeneticAlgorithm {
 		this.parentSelection = parentSelection;
 		this.crossover = crossover;
 		this.mutation  = new Mutation(flipMutationRate, inversionMutationRate, interchangeMutationRate, reversingMutationRate);
+		this.scenario = scenario;
 	}
 	
 	
@@ -54,7 +56,7 @@ public class GeneticAlgorithm {
 			System.out.println("Generation: " + run);
 			
 			//Calculate fitness
-			childPopulation.evaluateParallell(evaluator, grid);
+			childPopulation.evaluateParallell(evaluator, grid, scenario);
 			averageFitness.add(childPopulation.calculateAverageFitness());
 			bestFitness.add(childPopulation.calculateBestFitness());
 			worstFitness.add(childPopulation.calculateWorstFitness());
@@ -92,7 +94,7 @@ public class GeneticAlgorithm {
 			run += 1;
 		}
 		
-		childPopulation.evaluateParallell(evaluator, grid);
+		childPopulation.evaluateParallell(evaluator, grid, scenario);
 		childPopulation.printAverageFitness();
 		averageFitness.add(childPopulation.calculateAverageFitness());
 		bestFitness.add(childPopulation.calculateBestFitness());
@@ -109,6 +111,81 @@ public class GeneticAlgorithm {
 		String fileNameBest      = "best_island_" + island + "_simulation_" + simulation+ "_round_" + round;
 		String fileNameWorst     = "worst_island_" + island + "_simulation_" + simulation+ "_round_" + round;
 		String fileNameLayouts   = "island_" + island + "_simulation_"+ simulation + "_round_" + round;
+		
+		writeResults(fileNameAverage, averageFitness);
+		writeResults(fileNameBest, bestFitness);
+		writeResults(fileNameWorst, worstFitness);
+		writeMoreResults(fileNameLayouts, bestLayouts, evaluator);
+	}
+	
+	
+	public void run(int generations, int simulation){
+		System.out.println("Simulation: " + simulation);
+		ArrayList<Double> averageFitness   = new ArrayList<Double>();
+		ArrayList<Double> bestFitness      = new ArrayList<Double>();
+		ArrayList<Double> worstFitness     = new ArrayList<Double>();
+		ArrayList<double[][]> bestLayouts  = new ArrayList<double[][]>();;
+		
+		int run = 0;
+		while (run < generations){
+			System.out.println("Generation: " + run);
+			
+			//Calculate fitness
+			childPopulation.evaluateParallell(evaluator, grid, scenario);
+			averageFitness.add(childPopulation.calculateAverageFitness());
+			bestFitness.add(childPopulation.calculateBestFitness());
+			worstFitness.add(childPopulation.calculateWorstFitness());
+			bestLayouts.add(childPopulation.getBestLayout(grid));
+			//childPopulation.printPopulation("Child population");
+			//writeResults("average", Double.toString(childPopulation.calculateAverageFitness()));
+			
+			System.out.println("Average fitness: ");
+			childPopulation.printAverageFitness();
+			//childPopulation.printBestFitness();
+			
+			//Adult Selection
+			adultPopulation = adultSelection.select(childPopulation, adultPopulation);
+			//adultPopulation.printPopulation("Adult population");
+			//System.out.print("Adult population : ");
+			//adultPopulation.printAverageFitness();
+			//adultPopulation.printBestFitness();
+			
+			//Parent Selection
+			parentPopulation = parentSelection.select(adultPopulation);
+			//parentPopulation.printPopulation("Parent population");
+			//System.out.print("Parent population: ");
+			//parentPopulation.printAverageFitness();
+			//parentPopulation.printBestFitness();
+			
+			//Child generations
+			childPopulation = crossover.crossover(parentPopulation);
+			childPopulation = mutation.flipMutation(childPopulation);
+			childPopulation = mutation.inversionMutation(childPopulation);
+			childPopulation = mutation.interchangeMutation(childPopulation);
+			childPopulation = mutation.reversingMutation(childPopulation);
+			childPopulation = mutation.elitism(childPopulation, parentPopulation);
+			
+			//Generations
+			run += 1;
+		}
+		
+		childPopulation.evaluateParallell(evaluator, grid, scenario);
+		childPopulation.printAverageFitness();
+		averageFitness.add(childPopulation.calculateAverageFitness());
+		bestFitness.add(childPopulation.calculateBestFitness());
+		worstFitness.add(childPopulation.calculateWorstFitness());
+		bestLayouts.add(childPopulation.getBestLayout(grid));
+		//Normal GA
+		//String fileNameAverage = "average" + simulation;
+		//String fileNameBest    = "best" + simulation;
+		//String fileNameWorst   = "worst" + simulation;
+		//String fileNameLayouts = "" + simulation;
+		
+		//Island Model
+		String fileNameAverage   = "average_simulation_" + simulation;
+		String fileNameBest      = "best_simulation_" + simulation;
+		String fileNameWorst     = "worst_simulation_" + simulation;
+		String fileNameLayouts   = "" + simulation;
 		
 		writeResults(fileNameAverage, averageFitness);
 		writeResults(fileNameBest, bestFitness);
@@ -182,10 +259,10 @@ public class GeneticAlgorithm {
 			totalCostList.add(results[3]);
 		}
 		
-		String totalPower = "totalPower" + filename;
-		String efficiency = "efficiency" + filename;
-		String turbineNr  = "turbineNr"  + filename;
-		String totalCost  = "totalCost"  + filename;
+		String totalPower = "totalPower_simulation_" + filename;
+		String efficiency = "efficiency_simulation_" + filename;
+		String turbineNr  = "turbines_simulation_"  + filename;
+		String totalCost  = "cost_simulation_"  + filename;
 		
 		FileWriter fwTotalPower = null;
 		FileWriter fwEfficiency = null;

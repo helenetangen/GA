@@ -14,10 +14,10 @@ public class Evaluator implements Runnable{
 	private int end;   //exclusive
 
 	
-	public Evaluator(int start, int end, ArrayList<double[]> grid, Population population){
+	public Evaluator(int start, int end, ArrayList<double[]> grid, Population population, WindScenario scenario){
 		WindScenario windScenario;
 		try {
-			windScenario = new WindScenario("Scenarios/00.xml");
+			windScenario = scenario;
 			this.evaluator = new KusiakLayoutEvaluator();
 			this.evaluator.initialize(windScenario);
 		} catch (Exception e) {
